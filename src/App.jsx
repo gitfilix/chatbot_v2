@@ -1,6 +1,5 @@
 import React, { useState } from "react"
 import { v4 as uuidv4 } from "uuid"
-import dotenv from 'dotenv';
 import ChatBotStart from "./Components/ChatBotStart"
 import ChatBotApp from "./Components/ChatBotApp"
 
@@ -20,7 +19,7 @@ const App = () => {
     
     if (chats.length === 0) {
       createNewChat()
-      setChats([newChat])
+      // setChats([newChat])
     }
   }
 

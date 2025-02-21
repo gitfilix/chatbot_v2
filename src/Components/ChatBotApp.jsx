@@ -191,7 +191,7 @@ const ChatBotApp = ({ onGoBack, chats, setChats, activeChat, setActiveChat, onNe
             {isTyping &&
             <div className='typing'>Typing...</div>}
           <div className='response'>
-            <p>Hello, I am just a computer programm but I can assist you. how can I help you?</p>
+            <p>Response: Hello, how can I help you?</p>
             <span>20/07/2025 12:43:43 PM</span>
           </div>
           <div className="typing">Typing... </div>
