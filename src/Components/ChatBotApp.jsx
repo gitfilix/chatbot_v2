@@ -85,9 +85,6 @@ const ChatBotApp = ({ onGoBack, chats, setChats, activeChat, setActiveChat, onNe
         return;
       }
  
-
-      // const data = await response.json()
-      // console.log('rawData', data)
       // mostly the response is in the first choice and removes the leading and trailing whitespaces
       const chatResponse = data.choices[0].message.content.trim();
 
@@ -98,10 +95,10 @@ const ChatBotApp = ({ onGoBack, chats, setChats, activeChat, setActiveChat, onNe
         timestamp: new Date().toLocaleTimeString()
       }
 
-      // update the messages with the new response
+      // update the messages with the new response from Chat-GPT
       const updatedMessagesWithResponse = [...updatedMessages, newResponse]
       setMessages(updatedMessagesWithResponse)
-      // thinking period is over
+      // thinking period is over - no more typing
       setIsTyping(false)
 
       // update the curretn chatId with the new messages: updatedMessagesWithResponse
@@ -112,6 +109,7 @@ const ChatBotApp = ({ onGoBack, chats, setChats, activeChat, setActiveChat, onNe
             messages: updatedMessagesWithResponse
           }
         }
+        // return the chat as it is
         return chat
       })
       // update the chats with the new response from Chat-GPT
@@ -188,13 +186,7 @@ const ChatBotApp = ({ onGoBack, chats, setChats, activeChat, setActiveChat, onNe
                 <span>{msg.timestamp}</span>
               </div>
             ))}
-            {isTyping &&
-            <div className='typing'>Typing...</div>}
-          <div className='response'>
-            <p>Response: Hello, how can I help you?</p>
-            <span>20/07/2025 12:43:43 PM</span>
-          </div>
-          <div className="typing">Typing... </div>
+          {isTyping && <div className='typing'>Bot is responding...</div>}
         </div>
         <form className='msg-form'
           onSubmit={(e) => {
