@@ -143,7 +143,7 @@
 }
 
 .response {
-    background: linear-gradient(135deg, #fe8d5c, #fe4d57);
+    background: linear-gradient(135deg, #934625, #fe4d57);
     align-self: flex-start;
     border-radius: 0 3rem 3rem 3rem;
     text-align: left;
@@ -152,16 +152,19 @@
 .prompt p,
 .response p {
     font-family: 'Exo 2', sans-serif;
-    font-size: 1.6rem;
+    font-size: 1.8rem;
+    line-height: 2.6rem;
     display: block;
     margin-top: 0.5rem;
 }
 
+/* Typing placeholder for before answer arrives */
 .typing {
     font-family: 'Exo 2', sans-serif;
     font-size: 1.6rem;
     color:#7b8ebc;
     margin-top: auto;
+    margin-bottom: -3rem;
 }
 
 .msg-form {

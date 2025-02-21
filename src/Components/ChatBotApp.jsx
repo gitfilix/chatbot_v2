@@ -72,12 +72,11 @@ const ChatBotApp = ({ onGoBack, chats, setChats, activeChat, setActiveChat, onNe
         body: JSON.stringify({
           model: 'gpt-3.5-turbo',
           messages: [{role: 'user', content: inputValue}],
-          max_tokens: 150,
+          max_tokens: 250,
         }),
       })
-
+      // data response from the fetch request
       const data = await response.json();
-      console.log("API Response:", data);
       
       // Check for errors
       if (!response.ok) {
@@ -101,7 +100,7 @@ const ChatBotApp = ({ onGoBack, chats, setChats, activeChat, setActiveChat, onNe
       // thinking period is over - no more typing
       setIsTyping(false)
 
-      // update the curretn chatId with the new messages: updatedMessagesWithResponse
+      // update and add the curretn chatId with the new messages: updatedMessagesWithResponse
       const updatedChatsWithResponse = chats.map((chat) => {
         if (chat.id === activeChat) {
           return {
@@ -145,7 +144,11 @@ const ChatBotApp = ({ onGoBack, chats, setChats, activeChat, setActiveChat, onNe
     }
   }
 
-  //TODO: useEffect with useRef to scroll to the end of the chat window
+  // scroll to the end of the chat window: chatEndRef is a reference to the last message in the chat window
+  useEffect(() => {
+    chatEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }, [messages])
+
 
   return (
     <div className='chat-app'>
@@ -187,6 +190,7 @@ const ChatBotApp = ({ onGoBack, chats, setChats, activeChat, setActiveChat, onNe
               </div>
             ))}
           {isTyping && <div className='typing'>Bot is responding...</div>}
+          <div ref={chatEndRef} ></div>
         </div>
         <form className='msg-form'
           onSubmit={(e) => {
