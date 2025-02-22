@@ -23,7 +23,7 @@ const ChatBotApp = ({ onGoBack, chats, setChats, activeChat, setActiveChat, onNe
   
   useEffect(() => {
     if (activeChat){
-      const storedLocalStoreMessages = JSON.parse(localStorage.getItem(activeChat) || [])
+      const storedLocalStoreMessages = JSON.parse(localStorage.getItem(activeChat) || '[]')
       setMessages(storedLocalStoreMessages)
     }
   }, [activeChat])
