@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react'
-// import dotenv from 'dotenv';
+import Picker from '@emoji-mart/react'
+import emojidata from '@emoji-mart/data'
 import './ChatBotApp.css'
 
-// dotenv.config()
-
 const ChatBotApp = ({ onGoBack, chats, setChats, activeChat, setActiveChat, onNewChat }) => {
+  // state hooks
   const [inputValue, setInputValue] = useState('')
   const [messages, setMessages] = useState(chats[0]?.messages || [])
   const [isTyping, setIsTyping] = useState(false)
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false)
   const chatEndRef = useRef(null)
 
   // fetch the apiKey from the local .env file !
@@ -19,6 +20,11 @@ const ChatBotApp = ({ onGoBack, chats, setChats, activeChat, setActiveChat, onNe
     // set the messages to the active chat messages or an empty array if no active chat are available
     setMessages(activeChatObj ? activeChatObj.messages : [])
   }, [activeChat, chats])
+
+  // append to the input field the selected emoji
+  const handleEmojiSelect = (emoji) => {
+    setInputValue((prevInput) => prevInput + emoji.native)
+  }
 
   const handleInputChange = (e) => {
     setInputValue(e.target.value)
@@ -197,14 +203,28 @@ const ChatBotApp = ({ onGoBack, chats, setChats, activeChat, setActiveChat, onNe
             e.preventDefault()
             sendMessage()
           }}>
-          <i className='fa-solid  fa-face-smile emoji'></i>
+          <i 
+            className='fa-solid  fa-face-smile emoji' 
+            // this toggles the emoji picker prev and !prev is state toggling
+            onClick={() => setShowEmojiPicker((prev) => !prev)}></i>
+            {showEmojiPicker && (
+              <div className='emopicker'>
+                <Picker 
+                  data={emojidata}
+                  title='Pick your emoji'
+                  onEmojiSelect={handleEmojiSelect}
+                  />
+              </div>
+            )}
           <input 
             type='text' 
             placeholder='Ask me anything... FLX chatbot may help you - or not'  
             className='msg-input' 
             value={inputValue} 
             onChange={handleInputChange} 
-            onKeyDown={handleKeyDown} />
+            onKeyDown={handleKeyDown}
+            onFocus={() => setShowEmojiPicker(false)}
+            />
           <i 
             className='fa-solid fa-paper-plane' 
             onClick={sendMessage}>

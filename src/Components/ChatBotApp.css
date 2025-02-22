@@ -175,6 +175,7 @@
     background-color: #161c2c;
     box-shadow: 0 -0.5rem 1rem rgba(0, 0, 0, 0.5);
     padding-right: 5rem;
+    position: relative;
 }
 
 .msg-form i {
@@ -208,4 +209,14 @@
 
 .msg-input:focus::placeholder {
     opacity: 0 ;
+}
+
+/*picker styles*/
+.emopicker {
+    width: 10rem;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    bottom: 8rem;
+    left: 8rem;
 }
