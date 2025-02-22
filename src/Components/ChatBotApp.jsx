@@ -20,7 +20,14 @@ const ChatBotApp = ({ onGoBack, chats, setChats, activeChat, setActiveChat, onNe
     // set the messages to the active chat messages or an empty array if no active chat are available
     setMessages(activeChatObj ? activeChatObj.messages : [])
   }, [activeChat, chats])
-
+  
+  useEffect(() => {
+    if (activeChat){
+      const storedLocalStoreMessages = JSON.parse(localStorage.getItem(activeChat) || [])
+      setMessages(storedLocalStoreMessages)
+    }
+  }, [activeChat])
+  
   // append to the input field the selected emoji
   const handleEmojiSelect = (emoji) => {
     setInputValue((prevInput) => prevInput + emoji.native)
@@ -48,7 +55,7 @@ const ChatBotApp = ({ onGoBack, chats, setChats, activeChat, setActiveChat, onNe
       // if there is an active chat, get the messages of the active chat
       const updatedMessages = [...messages, newMessage]
       setMessages(updatedMessages)
-      
+      localStorage.setItem(activeChat, JSON.stringify(updatedMessages))
       // clear the input field by setting the input field value to an empty string
       setInputValue('')
   
@@ -66,6 +73,7 @@ const ChatBotApp = ({ onGoBack, chats, setChats, activeChat, setActiveChat, onNe
         return chat
       })
       setChats(updatedChats)
+      localStorage.setItem('chats', JSON.stringify(updatedChats))
       setIsTyping(true)
 
       // fetch response from openAi 
@@ -103,6 +111,7 @@ const ChatBotApp = ({ onGoBack, chats, setChats, activeChat, setActiveChat, onNe
       // update the messages with the new response from Chat-GPT
       const updatedMessagesWithResponse = [...updatedMessages, newResponse]
       setMessages(updatedMessagesWithResponse)
+      localStorage.setItem(activeChat, JSON.stringify(updatedMessagesWithResponse))
       // thinking period is over - no more typing
       setIsTyping(false)
 
@@ -119,6 +128,7 @@ const ChatBotApp = ({ onGoBack, chats, setChats, activeChat, setActiveChat, onNe
       })
       // update the chats with the new response from Chat-GPT
       setChats(updatedChatsWithResponse)
+      localStorage.setItem('chats', JSON.stringify(updatedChatsWithResponse))
     }
   }
 
@@ -142,6 +152,9 @@ const ChatBotApp = ({ onGoBack, chats, setChats, activeChat, setActiveChat, onNe
     // filter out the chat with the id to be deleted (all chats except the chat with the id)
     const updatedChats = chats.filter((chat) => chat.id !== id)
     setChats(updatedChats)
+    // save the updated chats to the local storage and remove the chat with the id to be deleted
+    localStorage.setItem('chats', JSON.stringify(updatedChats))
+    localStorage.removeItem(id)
 
     // if the chat to be deleted is the active chat, set the active chat to the first chat in the updated chats
     if(id === activeChat) {

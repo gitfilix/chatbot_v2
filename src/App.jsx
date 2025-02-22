@@ -15,7 +15,7 @@ const App = () => {
 
   useEffect(() => {
     // get the chats from the local storage
-    const storedChats = JSON.parse(localStorage.getItem('chats') || [])
+    const storedChats = JSON.parse(localStorage.getItem('chats') || '[]')
     // if there are saved chats, set the chats to the saved chats
     setChats(storedChats)
     
