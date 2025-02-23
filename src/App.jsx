@@ -25,8 +25,13 @@ const App = () => {
   }, [])
 
   const handleStartChat = () => {
+
     // TODO: lets wait for 250ms before we start chatting
-    setIsChatting(true)
+    setTimeout(() => {
+      setIsChatting(true)
+    }
+    , 350)
+    // setIsChatting(true)
     
     if (chats.length === 0) {
       createNewChat()

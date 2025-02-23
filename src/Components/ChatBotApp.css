@@ -77,7 +77,6 @@
 }
 
 /* chat window */
-
 .chat-window {
     width: 70%;
     height: 100%;
@@ -219,4 +218,40 @@
     position: absolute;
     bottom: 8rem;
     left: 8rem;
+}
+
+/*media querries  */
+@media (max-width: 900px) {
+   .chat-app {
+       flex-direction: column;
+   }
+   
+   /* chat list left hidden */
+   .chat-list {
+        border: 1px solid greenyellow;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 40%;
+        height: 100%;
+        transform: translateX(-100%);
+        transition: transform 0.5s ease-in-out;
+   }
+   
+   .chat-window {
+        width: 100%;
+   }
+
+   .chat-title h2 {
+        padding-left: 5rem;
+   }
+
+   /* burger item*/
+   .chat-title i.bx-menu {
+       display: block;
+        position: absolute;
+        font-size: 3rem;
+        color: #fffdc4;
+        cursor: pointer;
+   }
 }

@@ -175,8 +175,8 @@ const ChatBotApp = ({ onGoBack, chats, setChats, activeChat, setActiveChat, onNe
         <div className='chat-list-header'>
           <h2>Chat List</h2>
           <i className='bx bx-message-add new-chat'
-              onClick={() => onNewChat(inputValue)}>
-              </i>
+            onClick={() => onNewChat(inputValue)}>
+          </i>
         </div>
         {chats.map((chat) => (
             <div 
@@ -197,6 +197,7 @@ const ChatBotApp = ({ onGoBack, chats, setChats, activeChat, setActiveChat, onNe
       <div className='chat-window'>
         <div className='chat-title'>
           <h2>Chat with AI</h2>
+          <i className='bx bx-menu '></i>
           <i className='bx bx-arrow-back arrow'
              onClick={onGoBack}>
           </i>
