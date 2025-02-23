@@ -220,7 +220,7 @@
     left: 8rem;
 }
 
-/*media querries  */
+/* media querries tablet view max width 900 */
 @media (max-width: 900px) {
    .chat-app {
        flex-direction: column;
@@ -235,9 +235,15 @@
         width: 40%;
         height: 100%;
         transform: translateX(-100%);
-        transition: transform 0.5s ease-in-out;
+        transition: transform 0.5s ease-out;
+        z-index: 1000;
    }
    
+   .chat-list.show {
+        transform: translateX(0);
+        transition: transform 0.5s ease-in;
+   }
+
    .chat-window {
         width: 100%;
    }
@@ -254,4 +260,21 @@
         color: #fffdc4;
         cursor: pointer;
    }
+}
+
+/* mobile */
+
+@media (max-width: 500px) {
+    .chat-list {
+        width: 60%;
+    }
+
+    .emopicker {
+        bottom: 10rem;
+        left: 16rem;
+    }
+
+    .msg-input {
+        font-size: 1.6rem;
+    }
 }

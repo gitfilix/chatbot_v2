@@ -19,3 +19,14 @@ html {
   place-items: center;
   background-color: #3c174c
 }
+
+@media (max-width: 500px) {
+
+  html {
+    font-size: 53%;
+  }
+
+  .container {
+    background-color: #363390
+  }
+}

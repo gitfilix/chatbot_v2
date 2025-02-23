@@ -9,6 +9,7 @@ const ChatBotApp = ({ onGoBack, chats, setChats, activeChat, setActiveChat, onNe
   const [messages, setMessages] = useState(chats[0]?.messages || [])
   const [isTyping, setIsTyping] = useState(false)
   const [showEmojiPicker, setShowEmojiPicker] = useState(false)
+  const [showChatList, setShowChatList] = useState(false)
   const chatEndRef = useRef(null)
 
   // fetch the apiKey from the local .env file !
@@ -171,11 +172,14 @@ const ChatBotApp = ({ onGoBack, chats, setChats, activeChat, setActiveChat, onNe
 
   return (
     <div className='chat-app'>
-      <div className='chat-list'>
+      <div className={`chat-list ${showChatList ? 'show' : ''}`}>
         <div className='chat-list-header'>
           <h2>Chat List</h2>
           <i className='bx bx-message-add new-chat'
             onClick={() => onNewChat(inputValue)}>
+          </i>
+          <i className='bx bx-x-circle close-list'
+            onClick={() => setShowChatList(false)}>
           </i>
         </div>
         {chats.map((chat) => (
@@ -197,9 +201,10 @@ const ChatBotApp = ({ onGoBack, chats, setChats, activeChat, setActiveChat, onNe
       <div className='chat-window'>
         <div className='chat-title'>
           <h2>Chat with AI</h2>
-          <i className='bx bx-menu '></i>
+          <i className='bx bx-menu'
+            onClick={() => setShowChatList(true)}></i>
           <i className='bx bx-arrow-back arrow'
-             onClick={onGoBack}>
+            onClick={onGoBack}>
           </i>
         </div>
         <div className='chat'>
